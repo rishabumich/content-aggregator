@@ -1,0 +1,42 @@
+---
+import GreetingTitle from "../components/GreetingTitle.svelte";
+import PageHeader from "../components/PageHeader.astro";
+import PlaylistCard from "../components/PlaylistCard.astro";
+import InspirationCard from "../components/InspirationCard.astro";
+import PlaylistItemCard from "../components/PlaylistItemCard.astro";
+import Layout from "../layouts/Layout.astro";
+import { playlists, morePlaylists, inspirationLists } from "../lib/data";
+---
+
+<Layout title="Home">
+  <div
+    id="playlist-container"
+    class="relative transition-all duration-1000 bg-context"
+    style="min-height:300px"
+  >
+    <PageHeader />
+    <div class="relative z-10 px-6">
+      <GreetingTitle client:visible />
+      <div
+        class="grid gap-y-4 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mt-6"
+      >
+        {playlists.map((playlist) => <PlaylistItemCard playlist={playlist} />)}
+      </div>
+    </div>
+  </div>
+  <div class="px-6 relative z-10 mt-4">
+    <h2 class="text-2xl font-bold pt-10">Your Top Content</h2>
+    <div class="flex flex-wrap mt-6 gap-4">
+      {morePlaylists.map((playlist) => <PlaylistCard playlist={playlist} />)}
+    </div>
+  </div>
+
+  <!-- Here is a a bit of sample data to get you inspired (pl see creator.ts for more data).Also though for some reason this component breaks the transitions -->
+
+  <!-- <div class="px-6 relative z-10 mt-8">
+    <h2 class="text-2xl font-bold">Inspiration</h2>
+    <div class="flex flex-wrap mt-6 gap-4">
+      {inspirationLists?.map((item) => <InspirationCard contentObj={item} />)}
+    </div>
+  </div> -->
+</Layout>
